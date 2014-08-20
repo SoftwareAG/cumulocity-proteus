@@ -1,0 +1,142 @@
+body, html {
+  background: #F0E8DE;
+  font-family: Lato;
+  color: #A5A19B;
+}
+
+.logo_img {
+  opacity: 0.3;
+  max-width: 100%;
+}
+
+.logo_title {
+  width: 27%;
+  margin: 10px auto;
+}
+
+.gauge {
+  position: relative;
+  margin: 0 30px;
+  text-align: center;
+}
+
+.gauge > .title, .percentage, .infoAbsolute {
+  position : absolute;
+  text-align: center;
+  width: 100%;
+}
+
+.gauge > .title {
+  text-transform: uppercase;
+  top: 42px;
+}
+
+.title {
+  text-transform: uppercase;
+}
+
+.beige {
+  color: #CFC1B3;
+}
+
+.bold {
+  font-weight: 700;
+}
+.thin {
+  font-weight: 300;
+}
+
+.center {
+  text-align: center;
+}
+
+.percentage {
+  top: 50%;
+  font-weight: 300;
+  font-size:120px;
+  margin-top: -80px;
+  line-height: 120px;
+  letter-spacing: -5px
+}
+
+.percentage .symbol {
+  font-size: 80px;
+  vertical-align: text-top;
+  letter-spacing: -20px;
+}
+
+.infoAbsolute .capacity {
+  display: block;
+  font-size:18px;
+}
+
+.infoAbsolute {
+  bottom: 65px;
+}
+
+.lastUpdate {
+  margin:15px;
+}
+
+.lastUpdate > .title {
+  margin: 0;
+  font-size:12px;
+}
+
+.network, .battery {
+  width: 100px;
+  text-align: center;
+}
+
+.network {
+  float: right;
+}
+
+.staticInfo {
+  margin: 20px 0;
+}
+
+.staticInfo:after {
+   visibility: hidden;
+   display: block;
+   font-size: 0;
+   content: " ";
+   clear: both;
+   height: 0;
+}
+
+.staticInfo .info {
+  box-sizing: border-box;
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.staticInfo .title {
+  font-size: 12px;
+  margin:0;
+}
+
+.row:after, .staticInfo:after {
+  content: '<br>',
+  clear: both;
+}
+
+.btn {
+  display:inline-block;
+  background: #2F2E2C;
+  color: #838281;
+  text-transform: uppercase;
+  border-radius: 1px;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.btn svg {
+  fill: #838281;
+  margin-right: 5px;
+}
+
+
+.

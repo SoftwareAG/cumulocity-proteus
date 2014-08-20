@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+        <link rel="stylesheet" href="style/main.css">
+    </head>
+    <body>
+
+        <h1 class="logo_title"><img alt="Proteus" src="img/logo.svg" class="logo_img"></h1>
+
+        <div class="gauge" id="gauge">
+            <h2 class="title beige">Füllstand</h2>
+            <div class="percentage thin">99 <span class="symbol">%</span></div>
+            <div class="infoAbsolute">
+                <span class="capacity beige bold">11313L</span>
+                <span class="title thin">Ist-Volumen</span>
+            </div>
+            <svg id="gaugeSvg">
+                <defs>
+                    <pattern id="grad" x="0" y="0" width="1" height="1">
+                        <image xlink:href="img/grad.png"></image>
+                    </pattern>
+                    <filter id="blur">
+                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                    </filter>
+                    <clipPath id="circleClip">
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="lastUpdate center">
+            <h2 class="beige bold title">Letztes update</h2>
+            <span class="info thin">Gestern und 9:00 Uhr</span>
+        </div>
+
+        <div class="row">
+
+        <div class="network">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                height="41px" viewBox="0 0 85.352 60.107" enable-background="new 0 0 85.352 60.107" xml:space="preserve">
+            <circle cx="42.676" cy="30.054" r="7.852"/>
+            <path d="M72.903,0.001c7.691,7.691,12.448,18.317,12.448,30.053c0,11.737-4.757,22.362-12.448,30.053l-6.588-6.586
+                c6.005-6.006,9.72-14.303,9.72-23.467c0-9.164-3.715-17.46-9.72-23.466L72.903,0.001z M12.449,60.107
+                C4.757,52.416,0,41.791,0,30.054C0,18.317,4.757,7.691,12.449,0l6.588,6.588c-6.005,6.006-9.72,14.302-9.72,23.466
+                c0,9.165,3.715,17.459,9.72,23.465L12.449,60.107z"/>
+            <path d="M53.826,19.079c2.809,2.809,4.546,6.688,4.546,10.975c0,4.288-1.737,8.167-4.546,10.975l6.953,6.955
+                c4.589-4.588,7.428-10.928,7.428-17.93c0-7.002-2.838-13.341-7.428-17.93L53.826,19.079z M31.526,41.029
+                c-2.809-2.809-4.546-6.689-4.546-10.975c0-4.286,1.737-8.167,4.546-10.976l-6.954-6.954c-4.588,4.589-7.427,10.928-7.427,17.93
+                c0,7.002,2.838,13.34,7.427,17.93L31.526,41.029z"/>
+            </svg><br>
+
+            <span class="val beige bold title">Gut</span>
+        </div>
+
+        <div class="battery">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="85.352px" height="41.433px" viewBox="0 0 85.352 41.433" enable-background="new 0 0 85.352 41.433" xml:space="preserve">
+            <g>
+                <path d="M66.707,6.215v29.003H6.215V6.215H66.707 M72.922,0H0v41.433h72.922V0z"/>
+                <path d="M77.065,30.038h4.972c1.831,0,3.314-1.483,3.314-3.313V14.709c0-1.831-1.483-3.315-3.314-3.315h-4.972V30.038z"/>
+                <rect x="10.358" y="10.358" width="9.944" height="20.716"/>
+                <rect x="24.445" y="10.358" width="9.944" height="20.716"/>
+                <rect x="38.532" y="10.358" width="9.944" height="20.716"/>
+                <rect x="52.62" y="10.358" width="9.943" height="20.716"/>
+            </g>
+            </svg>
+            <span class="val beige bold">97%</span>
+        </div>
+
+        </div>
+
+        <div class="row staticInfo">
+            <div class="info">
+                <h3 class="title beige bold">Gerantenr.</h3>
+                <span class="thin">34343-34</span>
+            </div>
+            <div class="info">
+                <h3 class="title beige bold">Max volumen</h3>
+                <span class="thin">1320L</span>
+            </div>
+            <div class="info">
+                <h3 class="title beige bold">Medium</h3>
+                <span class="thin">Kerosene</span>
+            </div>
+        </div>
+
+        <div class="row center">
+            <a href="#" class="btn">
+                <svg width="20px" viewBox="0 0 48 41.125" enable-background="new 0 0 48 41.125">
+                    <g>
+                        <path id="bar_chart_3_icon" d="M11.479,32.699H3.65v-8h7.828V32.699z M22.431,32.699h-7.829V17.01h7.829V32.699z M33.381,32.699
+                            h-7.828V8.077h7.828V32.699z M44.333,32.699h-7.828V0h7.828V32.699z M48,35.882H0v5.242h48V35.882z"/>
+                    </g>
+                </svg>
+                Messungen
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="10px" height="10px" viewBox="0 0 10 10" enable-background="new 0 0 10 10" xml:space="preserve">
+<path d="M7.17,4.679C7.264,4.771,7.311,4.88,7.311,5.004c0,0.125-0.047,0.233-0.141,0.326L3.953,8.543
+    C3.861,8.635,3.754,8.682,3.631,8.682S3.4,8.635,3.307,8.543L2.828,8.064C2.736,7.971,2.689,7.863,2.689,7.74
+    s0.047-0.23,0.139-0.322l2.434-2.433L2.828,2.582C2.736,2.489,2.689,2.383,2.689,2.264s0.047-0.226,0.139-0.318l0.479-0.488
+    C3.4,1.364,3.508,1.318,3.633,1.318s0.232,0.046,0.32,0.139L7.17,4.679L7.17,4.679z"/>
+</svg>
+            </a>
+        </div>
+
+        <script src="bower_components/d3/d3.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="script/main.js"></script>
+
+    </body>
+</html>

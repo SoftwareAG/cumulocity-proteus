@@ -1,0 +1,21 @@
+{
+  "name": "proteus",
+  "version": "0.0.0",
+  "authors": [
+    "Luis Confraria <lconfraria@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.2.22",
+    "jquery": "~2.1.1",
+    "d3": "~3.4.11"
+  }
+}
