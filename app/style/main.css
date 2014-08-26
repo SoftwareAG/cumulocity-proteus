@@ -1,3 +1,28 @@
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v8/22JRxvfANxSmnAhzbFH8PgLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v8/MDadn8DQ_3oT6kvnUq_2r_esZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(http://fonts.gstatic.com/s/lato/v8/MgNNr5y1C_tIEuLEmicLmwLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
 body, html {
   background: #F0E8DE;
   font-family: Lato;
@@ -16,7 +41,7 @@ body, html {
 
 .gauge {
   position: relative;
-  margin: 0 30px;
+  margin: 0 35px;
   text-align: center;
 }
 
@@ -33,6 +58,10 @@ body, html {
 
 .title {
   text-transform: uppercase;
+}
+
+.center {
+  text-align: center
 }
 
 .beige {
@@ -53,14 +82,14 @@ body, html {
 .percentage {
   top: 50%;
   font-weight: 300;
-  font-size:120px;
+  font-size:110px;
   margin-top: -80px;
   line-height: 120px;
   letter-spacing: -5px
 }
 
 .percentage .symbol {
-  font-size: 80px;
+  font-size: 60px;
   vertical-align: text-top;
   letter-spacing: -20px;
 }
@@ -138,5 +167,61 @@ body, html {
   margin-right: 5px;
 }
 
+.battery.empty rect,
+.battery.low rect,
+.battery.medium rect,
+.battery.high rect
+{
+  fill: transparent;
+}
 
-.
+.battery.low .rect1,
+.battery.medium .rect1,
+.battery.medium .rect2,
+.battery.high .rect1,
+.battery.high .rect2,
+.battery.high .rect3,
+.battery.full rect
+{
+  fill: black;
+}
+
+.network.ok .shape1 {
+  opacity: 0.05;
+}
+
+.network.marginal .shape1,
+.network.marginal .shape2 {
+  opacity: 0.05;
+}
+
+.graphPath {
+  stroke: #51EAE9;
+  stroke-width: 3px;
+  fill: transparent;
+
+}
+
+.graphArea {
+  opacity: 0.2;
+}
+
+.axis text {
+  font-size: 14px;
+  fill: #BFA995;
+  text-transform: uppercase;
+}
+
+.listCont {
+  margin: 10px 25px;
+}
+
+.list {
+  width: 100%;
+}
+
+.list td {
+  padding: 4px;
+  border-bottom: 1px solid #CCC;
+  text-transform: uppercase;
+}
