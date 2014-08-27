@@ -1,6 +1,7 @@
 (function () {
   var setGauge,
-    months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'];
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
+    deviceId = '22600';
 
   function drawCircle(size) {
     var gap = 0.79,
@@ -152,6 +153,7 @@
     var width = size,
       height = size;
 
+
     d3.select('.gaugeSvgG').remove();
 
     var svg = d3.select('#gaugeSvg')
@@ -207,15 +209,29 @@
   function setupMain() {
     drawCircle($('#gauge').width());
 
-    setSignal(-85);
-    setBattery(50);
-    setCapacity('123123L');
-    setGauge(31);
-    setLastUpdate('2014-08-11T15:55:11.415+02:00');
-    setStaticInfo({
-      serial: '123123',
-      vol: '40L',
-      medium: 'Kerosene'
+
+    getMainData().success(function (mo) {
+      var signal = mo.c8y_SignalStrength.rssi.value,
+        battery = mo.c8y_Battery.level.value,
+        capacity = mo.c8y_TankConfiguration.capacity.usable,
+        remaining = mo.c8y_TekelecRemainingFuel.capacity.value,
+        hw = mo.c8y_Hardware,
+        fuel = mo.c8y_TankConfiguration.fuel;
+
+
+      setSignal(signal);
+      setBattery(battery);
+      setCapacity(capacity + 'L');
+
+      setTimeout(function() {
+        setGauge(Math.round(remaining / capacity * 100));
+      }, 500);
+      setLastUpdate(mo.lastUpdate);
+      setStaticInfo({
+        serial: hw.serialNumber,
+        vol: capacity + 'L',
+        medium: fuel
+      });
     });
   }
 
@@ -232,6 +248,16 @@
 
     drawGraph(graphData);
     drawTable(graphData);
+  }
+
+  function getMainData() {
+    var url = '/data/managedObject.json';
+    return $.ajax({
+      url: url,
+      headers:  {
+        Authorization: 'Basic bWFuYWdlbWVudC9hZG1pbjpQeWkxYm8xcg=='
+      }
+    });
   }
 
 

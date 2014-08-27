@@ -1,0 +1,61 @@
+{
+  "assetParents": {
+    "references": [],
+    "self": "http://integration.cumulocity.com/inventory/managedObjects/22600/assetParents"
+  },
+  "childAssets": {
+    "references": [],
+    "self": "http://integration.cumulocity.com/inventory/managedObjects/22600/childAssets"
+  },
+  "childDevices": {
+    "references": [],
+    "self": "http://integration.cumulocity.com/inventory/managedObjects/22600/childDevices"
+  },
+  "deviceParents": {
+    "references": [],
+    "self": "http://integration.cumulocity.com/inventory/managedObjects/22600/deviceParents"
+  },
+  "id": "22600",
+  "lastUpdated": "2014-08-27T10:27:39.110Z",
+  "name": "Proteus tank",
+  "owner": "admin",
+  "self": "http://integration.cumulocity.com/inventory/managedObjects/22600",
+  "type": "proteusTank",
+  "c8y_IsDevice": true,
+  "c8y_TekelecRemainingFuel": {
+    "capacity": {
+      "unit": "L",
+      "value": 50
+    }
+  },
+  "c8y_SignalStrength": {
+    "ber": null,
+    "rssi": {
+      "unit": "dBm",
+      "value": -69
+    }
+  },
+  "c8y_Battery": {
+    "level": {
+      "unit": "V",
+      "value": 25
+    }
+  },
+  "c8y_Hardware": {
+    "serialNumber": "1231-FX"
+  },
+  "c8y_TankConfiguration": {
+    "height": 105,
+    "capacityOfAdjustment": 0.95,
+    "width": 110,
+    "length": 150,
+    "fuel": "Kerosene",
+    "capacity": {
+      "usable": 870,
+      "unusable": 80
+    },
+    "sensorMountingOffset": 2,
+    "outletHeight": 8,
+    "tankType": "ELLIPTICAL"
+  }
+}
