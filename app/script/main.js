@@ -1,7 +1,11 @@
 (function () {
   var setGauge,
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
-    deviceId = '22600';
+    deviceId = '22600',
+    URL_BASE = '',
+    TENANT = 'innotecmk',
+    DEVICE_ID = '78200',
+    DEVICE_DATA = {};
 
   function drawCircle(size) {
     var gap = 0.79,
@@ -76,14 +80,14 @@
       width = $('div.graph').width(),
       height = width * (3/4),
       margin = 25,
-      scaleX = d3.scale.linear()
-        .domain([0, data.length - 1])
+      scaleX = d3.time.scale()
+        .domain([data[0].date.toDate(), data[data.length - 1].date.toDate()])
         .range([0, width - margin * 2]),
       scaleY = d3.scale.linear()
         .domain([0, 100])
         .range([height - margin * 2, 0]),
 
-      x = function (d, i)  { return scaleX(i); },
+      x = function (d)  { return scaleX(d.date.toDate()); },
       y = function (d)  { return scaleY(d.val); },
 
 
@@ -97,11 +101,11 @@
         .innerTickSize(0)
         .outerTickSize(0),
       xAxis = d3.svg.axis()
+        .tickFormat(function (d) { return moment(d).format('MMM'); })
         .scale(scaleX)
         .tickSize(1)
         .innerTickSize(1)
         .outerTickSize(0)
-        .tickFormat(function (d) { return months[d] || ''; })
         .orient('bottom');
 
     root.select('svg').remove();
@@ -143,8 +147,8 @@
     var tr = row.enter()
       .append('tr')
         .html(function (d) {
-          return '<td class="beige tile">' + months[d.month] + '</td>' +
-            '<td style="text-align:right">' + d.val + '</td>';
+          return '<td class="beige tile">' + d.month + '</td>' +
+            '<td style="text-align:right">' + d.val + '%</td>';
         });
 
   }
@@ -207,57 +211,172 @@
   }
 
   function setupMain() {
-    drawCircle($('#gauge').width());
+
+    if (!setupMain.done) {
+      drawCircle($('#gauge').width());
+      setupMain.done = true;
+    }
+
+    getMainData().success(drawMainData);
+  }
+
+  function drawMainData(mo) {
+    DEVICE_DATA = mo;
+
+    var signal = mo.c8y_SignalStrength.rssi.value,
+      battery = mo.c8y_Battery.level.value,
+      capacity = mo.c8y_TankConfiguration.capacity.usable,
+      remaining = mo.c8y_TekelecRemainingFuel.capacity.value,
+      hw = mo.c8y_Hardware,
+      fuel = mo.c8y_TankConfiguration.fuel;
 
 
-    getMainData().success(function (mo) {
-      var signal = mo.c8y_SignalStrength.rssi.value,
-        battery = mo.c8y_Battery.level.value,
-        capacity = mo.c8y_TankConfiguration.capacity.usable,
-        remaining = mo.c8y_TekelecRemainingFuel.capacity.value,
-        hw = mo.c8y_Hardware,
-        fuel = mo.c8y_TankConfiguration.fuel;
+    setSignal(signal);
+    setBattery(battery);
+    setCapacity(capacity + 'L');
 
-
-      setSignal(signal);
-      setBattery(battery);
-      setCapacity(capacity + 'L');
-
-      setTimeout(function() {
-        setGauge(Math.round(remaining / capacity * 100));
-      }, 500);
-      setLastUpdate(mo.lastUpdate);
-      setStaticInfo({
-        serial: hw.serialNumber,
-        vol: capacity + 'L',
-        medium: fuel
-      });
+    setGauge(Math.round(remaining / capacity * 100));
+    setLastUpdate(mo.lastUpdate);
+    setStaticInfo({
+      serial: hw.serialNumber,
+      vol: capacity + 'L',
+      medium: fuel
     });
   }
 
   function setupStats() {
-    var graphData = [
-      {month: 0, val: 20},
-      {month: 1, val: 24},
-      {month: 2, val: 60},
-      {month: 3, val: 60},
-      {month: 4, val: 100},
-      {month: 5, val: 90},
-      {month: 6, val: 80},
-    ];
+    // var graphData = [
+    //   {month: 0, val: 20},
+    //   {month: 1, val: 24},
+    //   {month: 2, val: 60},
+    //   {month: 3, val: 60},
+    //   {month: 4, val: 100},
+    //   {month: 5, val: 90},
+    //   {month: 6, val: 80},
+    // ];
 
-    drawGraph(graphData);
-    drawTable(graphData);
+    getMeasurementData().success(function (data) {
+      var measurements = data.measurements,
+        map = {},
+        graphData = [];
+
+      measurements.forEach(function (m) {
+        var d = moment(m.time),
+          month = d.format('YYYYMM');
+        map[month] = {
+          val: Math.round( m.c8y_TekelecRemainingFuel.capacity.value / DEVICE_DATA.c8y_TankConfiguration.capacity.usable * 100),
+          date: d
+        };
+      });
+
+      Object.keys(map).sort(function (a, b) {
+        return Number(a) > Number(b);
+      }).forEach(function (month) {
+
+        graphData.push({
+          month: map[month].date.format('MMM'),
+          date: map[month].date,
+          val: map[month].val
+        });
+
+      });
+
+      drawGraph(graphData);
+      drawTable(graphData);
+
+    });
   }
 
   function getMainData() {
-    var url = '/data/managedObject.json';
+    var moID = DEVICE_ID;
+    var url = URL_BASE + '/inventory/managedObjects/' + moID;
     return $.ajax({
       url: url,
       headers:  {
-        Authorization: 'Basic bWFuYWdlbWVudC9hZG1pbjpQeWkxYm8xcg=='
+        Authorization: 'Basic ' + TOKEN
       }
     });
+  }
+
+  function getMeasurementData() {
+    var days = 360,
+      dateFrom = moment().subtract(days, 'days').format('YYYY-MM-DD'),
+      dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
+      url = URL_BASE + '/measurement/measurements/?pageSize= ' + days + '&source=' + DEVICE_ID + '&dateFrom=' + dateFrom + '&dateTo=' + dateTo;
+
+    return $.ajax({
+      url: url,
+      headers: {
+        Authorization: 'Basic ' + TOKEN
+      }
+    });
+  }
+
+  function getHeaders(_token) {
+    var t = _token || TOKEN;
+    return {
+      Authorization: 'Basic ' + t,
+      UseXBasic: true,
+      // 'X-Cumulocity-Application-Key': 'devicemanagement-application-key',
+      Accept: 'application/vnd.com.nsn.cumulocity.user+json;'
+    };
+  }
+
+  function login(user, pass, tenant) {
+    if (!tenant && TENANT) {
+      tenant = TENANT;
+    }
+
+    var token = btoa(
+      (tenant ? tenant + '/' : '') +
+      user + ':' +
+      pass
+    );
+    TOKEN = token;
+    var url = URL_BASE  + '/user/currentUser';
+
+    return $.ajax({
+      url: url,
+      headers: getHeaders(token)
+    }).then(function (data) {
+      TOKEN = token;
+      showScreen('main');
+      setupMain();
+      return data;
+    }, function (data) {
+      alert('ungültige Anmeldeinformationen');
+    });
+  }
+
+  function setupLogin() {
+    $('.login form').on('submit', function(e) {
+      e.preventDefault();
+      var form = $(this),
+        username = form.find('[name=username]').val(),
+        password = form.find('[name=password]').val();
+
+      if (username && password) {
+        login(username, password);
+      }
+    });
+  }
+
+  function hideScreens() {
+    $('.screen').hide();
+  }
+
+  function showScreen(scr) {
+    var actions = {
+      main: setupMain,
+      stats: setupStats
+    };
+
+    hideScreens();
+    $('.' + scr).show();
+
+    if (actions[scr]) {
+      actions[scr]();
+    }
   }
 
 
@@ -265,22 +384,17 @@
     var main = $('.main'),
       stats = $('.stats');
 
-
     $('#btnStat').on('click', function (e) {
       e.preventDefault();
-      main.hide();
-      stats.show();
-      setupStats();
+      showScreen('stats');
     });
 
     $('#btnGauge').on('click', function (e) {
       e.preventDefault();
-      stats.hide();
-      main.show();
-      setupMain();
+      showScreen('main');
     });
 
-    setupMain();
+    setupLogin();
   });
 }());
 
