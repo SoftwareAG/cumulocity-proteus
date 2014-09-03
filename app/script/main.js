@@ -188,9 +188,13 @@
     var scale = d3.scale.quantile()
       .domain([0,100])
       .range(['empty', 'low', 'medium' ,'high', 'full']);
+    var scalePercent = d3.scale.linear()
+      .domain([0,6])
+      .range([0,100]);
+    var percent = scalePercent(battery);
 
     $('.battery').attr('class', 'battery ' + scale(battery));
-    $('.battery .val').text(battery + '%');
+    $('.battery .val').text(percent + '%');
   }
 
   function setSignal(nr) {
