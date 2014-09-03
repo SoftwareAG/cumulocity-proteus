@@ -193,7 +193,7 @@
       .range([0,100]);
     var percent = scalePercent(battery);
 
-    $('.battery').attr('class', 'battery ' + scale(battery));
+    $('.battery').attr('class', 'battery ' + scale(percent));
     $('.battery .val').text(percent + '%');
   }
 
