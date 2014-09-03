@@ -217,7 +217,9 @@
       setupMain.done = true;
     }
 
-    getMainData().success(drawMainData);
+    getMainData().success(function (data) {
+      drawMainData(data.managedObjects[0] || {});
+    });
   }
 
   function drawMainData(mo) {
@@ -289,7 +291,7 @@
 
   function getMainData() {
     var moID = DEVICE_ID;
-    var url = URL_BASE + '/inventory/managedObjects/' + moID;
+    var url = URL_BASE + '/inventory/managedObjects/?fragmentType=c8y_TankConfiguration&pageSize=1';
     return $.ajax({
       url: url,
       headers:  {
