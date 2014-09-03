@@ -100,8 +100,18 @@
         .tickValues([0, 25, 50, 75, 100])
         .innerTickSize(0)
         .outerTickSize(0),
+
+      doneMonths = [],
       xAxis = d3.svg.axis()
-        .tickFormat(function (d) { return moment(d).format('MMM'); })
+        .tickFormat(function (d) {
+          var m = moment(d).format('MMM'),
+            tick = '';
+          if (doneMonths.indexOf(m) === -1) {
+            doneMonths.push(m);
+            tick = m;
+          }
+          return tick;
+        })
         .scale(scaleX)
         .tickSize(1)
         .innerTickSize(1)
@@ -304,7 +314,11 @@
     var days = 360,
       dateFrom = moment().subtract(days, 'days').format('YYYY-MM-DD'),
       dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
-      url = URL_BASE + '/measurement/measurements/?pageSize= ' + days + '&source=' + DEVICE_ID + '&dateFrom=' + dateFrom + '&dateTo=' + dateTo;
+      url = URL_BASE + '/measurement/measurements/?pageSize= ' + days +
+        '&source=' + DEVICE_DATA.id +
+        '&dateFrom=' + dateFrom +
+        '&dateTo=' + dateTo +
+        '&type=c8y_TekelecRemainingFuel';
 
     return $.ajax({
       url: url,
