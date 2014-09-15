@@ -16,7 +16,7 @@ body, html {
 
 .gauge {
   position: relative;
-  margin: 0 35px;
+  margin: 0 0.8em;
   text-align: center;
 }
 
@@ -28,7 +28,7 @@ body, html {
 
 .gauge > .title {
   text-transform: uppercase;
-  top: 42px;
+  top: 1.2em;
 }
 
 .title {
@@ -57,18 +57,18 @@ body, html {
 .percentage {
   top: 50%;
   font-weight: 300;
-  font-size:110px;
+  font-size:6.5em;
   margin-top: -80px;
   line-height: 120px;
   letter-spacing: -5px
 }
 
 .percentage .symbol {
-  font-size: 60px;
+  font-size: 0.5em;
   vertical-align: text-top;
 }
 
-.infoAbsolute .capacity {
+.infoAbsolute .remaining {
   display: block;
   font-size:18px;
 }
@@ -230,4 +230,11 @@ body, html {
 
 .login button {
   padding: 10px 40px;
+}
+
+.serialNr .thin {
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
 }

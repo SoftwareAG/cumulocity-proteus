@@ -9,7 +9,7 @@
 
   function drawCircle(size) {
     var gap = 0.79,
-      width = 30,
+      width = size/10,
       radius = size / 2,
       svg = getSvg(size),
 
@@ -184,6 +184,10 @@
     $('.infoAbsolute .capacity').text(capacity);
   }
 
+  function setRemaining(remaining) {
+    $('.infoAbsolute .remaining').text(remaining);
+  }
+
   function setBattery(battery) {
     var scale = d3.scale.quantile()
       .domain([0,100])
@@ -191,7 +195,7 @@
     var scalePercent = d3.scale.linear()
       .domain([0,6])
       .range([0,100]);
-    var percent = scalePercent(battery);
+    var percent = Math.round(scalePercent(battery));
 
     $('.battery').attr('class', 'battery ' + scale(percent));
     $('.battery .val').text(percent + '%');
@@ -250,6 +254,7 @@
     setSignal(signal);
     setBattery(battery);
     setCapacity(capacity + 'L');
+    setRemaining(remaining + 'L');
 
     setGauge(Math.round(remaining / capacity * 100));
     setLastUpdate(mo.lastUpdate);
