@@ -8,6 +8,9 @@
     DEVICE_DATA = {};
 
   function drawCircle(size) {
+    if (size > 400) {
+      size = 400;
+    }
     var gap = 0.79,
       width = size/10,
       radius = size / 2,
@@ -28,7 +31,7 @@
         .startAngle(0)
         .endAngle(Math.PI * 2);
 
-    d3.select('image')
+    d3.select('#gradientImage')
       .attr({
         width: size * 1.2,
         height: size * 1.2
@@ -256,7 +259,8 @@
     setCapacity(capacity + 'L');
     setRemaining(remaining + 'L');
 
-    setGauge(Math.round(remaining / capacity * 100));
+    // setGauge(Math.round(remaining / capacity * 100));
+    setGauge(50);
     setLastUpdate(mo.lastUpdate);
     setStaticInfo({
       serial: hw.serialNumber,

@@ -28,7 +28,7 @@ body, html {
 
 .gauge > .title {
   text-transform: uppercase;
-  top: 1.2em;
+  top: 1.3em;
 }
 
 .title {
@@ -59,13 +59,12 @@ body, html {
   font-weight: 300;
   font-size:6.5em;
   margin-top: -80px;
-  line-height: 120px;
   letter-spacing: -5px
 }
 
 .percentage .symbol {
   font-size: 0.5em;
-  vertical-align: text-top;
+  vertical-align: middle;
 }
 
 .infoAbsolute .remaining {
