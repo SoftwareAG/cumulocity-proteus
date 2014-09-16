@@ -5,7 +5,8 @@
     URL_BASE = '',
     TENANT = 'innotecmk',
     DEVICE_ID = '78200',
-    DEVICE_DATA = {};
+    DEVICE_DATA = {},
+    USER;
 
   function drawCircle(size) {
     if (size > 400) {
@@ -371,6 +372,18 @@
     };
   }
 
+  function saveToken(token) {
+    window.localStorage.setItem('t', token);
+  }
+
+  function getToken() {
+    return window.localStorage.getItem('t');
+  }
+
+  function clearToken() {
+    return window.localStorage.removeItem('t');
+  }
+
   function login(user, pass, tenant) {
     if (!tenant && TENANT) {
       tenant = TENANT;
@@ -382,18 +395,32 @@
       pass
     );
     TOKEN = token;
-    var url = URL_BASE  + '/user/currentUser';
 
+    getUser(token).then(function () {}, function (data) {
+      alert('ungültige Anmeldeinformationen');
+    });
+  }
+
+  function logout() {
+    clearToken();
+    $('.logout').hide();
+    $('.user').text('');
+    showScreen('login');
+  }
+
+  function getUser(token) {
+    var url = URL_BASE  + '/user/currentUser';
     return $.ajax({
       url: url,
       headers: getHeaders(token)
     }).then(function (data) {
+      USER = data;
       TOKEN = token;
+      saveToken(token);
       showScreen('main');
       setupMain();
+      displayUser();
       return data;
-    }, function (data) {
-      alert('ungültige Anmeldeinformationen');
     });
   }
 
@@ -408,6 +435,17 @@
         login(username, password);
       }
     });
+  }
+
+  function displayUser() {
+    $('.user').text(USER.userName);
+    $('.logout')
+      .show()
+      .on('click', function (e) {
+        e.preventDefault();
+        logout();
+      });
+
   }
 
   function hideScreens() {
@@ -428,6 +466,20 @@
     }
   }
 
+  function init() {
+    var t = getToken();
+    hideScreens();
+    setupLogin();
+
+    if (t) {
+      TOKEN = t;
+      getUser(t).then(function () {}, function () {
+        showScreen('login');
+      });
+    } else {
+      showScreen('login');
+    }
+  }
 
   $(function() {
     var main = $('.main'),
@@ -443,7 +495,7 @@
       showScreen('main');
     });
 
-    setupLogin();
+    init();
   });
 }());
 

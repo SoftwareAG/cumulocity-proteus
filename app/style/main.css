@@ -237,3 +237,17 @@ body, html {
   max-width: 100%;
   overflow: hidden;
 }
+
+.user {
+  margin: 10px;
+  font-size:12px;
+  opacity: 0.7;
+  padding: 5px;
+}
+
+.logout.btn {
+  background: transparent;
+  /*border: 1px solid #2F2E2C;*/
+  font-size:10px;
+  /*opacity: 0.5;*/
+}
