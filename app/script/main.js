@@ -250,6 +250,9 @@
 
     getMainData().success(function (data) {
       drawMainData(data.managedObjects[0] || {});
+      if (isBigScreen()) {
+        showScreen('stats', true);
+      }
     });
   }
 
@@ -452,13 +455,17 @@
     $('.screen').hide();
   }
 
-  function showScreen(scr) {
+  function showScreen(scr, noHide) {
     var actions = {
       main: setupMain,
       stats: setupStats
     };
 
-    hideScreens();
+
+    if (!noHide) {
+      hideScreens();
+    }
+
     $('.' + scr).show();
 
     if (actions[scr]) {
@@ -472,13 +479,16 @@
     setupLogin();
 
     if (t) {
-      TOKEN = t;
       getUser(t).then(function () {}, function () {
         showScreen('login');
       });
     } else {
       showScreen('login');
     }
+  }
+
+  function isBigScreen() {
+    return $(window).width() > 800;
   }
 
   $(function() {
