@@ -105,14 +105,23 @@
         .outerTickSize(0),
 
       doneMonths = [],
+      doneDays = [],
       xAxis = d3.svg.axis()
         .tickFormat(function (d) {
-          var m = moment(d).format('MMM'),
+          var day = moment(d).format('DDMMM'),
+            m = moment(d).format('YYYYMM'),
             tick = '';
+
+          if (doneDays.indexOf(day) === -1) {
+            doneDays.push(day);
+            tick = moment(d).format('DD');
+          }
+
           if (doneMonths.indexOf(m) === -1) {
             doneMonths.push(m);
-            tick = m;
+            tick += ' ' + moment(d).format('MMM');
           }
+
           return tick;
         })
         .scale(scaleX)
@@ -160,7 +169,7 @@
     var tr = row.enter()
       .append('tr')
         .html(function (d) {
-          return '<td class="beige tile">' + d.month + '</td>' +
+          return '<td class="beige tile">' + d.ref + '</td>' +
             '<td style="text-align:right">' + d.val + '%</td>';
         });
 
@@ -259,8 +268,7 @@
     setCapacity(capacity + 'L');
     setRemaining(remaining + 'L');
 
-    // setGauge(Math.round(remaining / capacity * 100));
-    setGauge(50);
+    setGauge(Math.round(remaining / capacity * 100));
     setLastUpdate(mo.lastUpdate);
     setStaticInfo({
       serial: hw.serialNumber,
@@ -283,31 +291,42 @@
     getMeasurementData().success(function (data) {
       var measurements = data.measurements,
         map = {},
-        graphData = [];
+        graphData = measurements.map(function (m) {
+          var d = moment(m.time);
 
-      measurements.forEach(function (m) {
-        var d = moment(m.time),
-          month = d.format('YYYYMM');
-        map[month] = {
-          val: Math.round( m.c8y_TekelecRemainingFuel.capacity.value / DEVICE_DATA.c8y_TankConfiguration.capacity.usable * 100),
+          return {
+            val: Math.round( m.c8y_TekelecRemainingFuel.capacity.value / DEVICE_DATA.c8y_TankConfiguration.capacity.usable * 100),
+            date: d
+          };
+        }),
+        tableData = [];
+
+      graphData.forEach(function (m) {
+        var d = m.date,
+          ref = d.format('YYYYMMDD');
+        map[ref] = {
+          val: m.val,
           date: d
         };
       });
 
-      Object.keys(map).sort(function (a, b) {
-        return Number(a) > Number(b);
-      }).forEach(function (month) {
-
-        graphData.push({
-          month: map[month].date.format('MMM'),
-          date: map[month].date,
-          val: map[month].val
-        });
-
+      var keys = Object.keys(map);
+      keys.sort(function (a, b) {
+        return parseInt(a, 10) > parseInt(b, 10) ? -1 : 1;
       });
 
+      keys.forEach(function (ref) {
+        tableData.push({
+          ref: map[ref].date.format('DD MMM'),
+          date: map[ref].date,
+          val: map[ref].val
+        });
+      });
+
+
+
       drawGraph(graphData);
-      drawTable(graphData);
+      drawTable(tableData);
 
     });
   }
@@ -327,7 +346,8 @@
     var days = 360,
       dateFrom = moment().subtract(days, 'days').format('YYYY-MM-DD'),
       dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
-      url = URL_BASE + '/measurement/measurements/?pageSize= ' + days +
+      url = URL_BASE + '/measurement/measurements/?' +
+        'pageSize=5000' +
         '&source=' + DEVICE_DATA.id +
         '&dateFrom=' + dateFrom +
         '&dateTo=' + dateTo +
