@@ -14,6 +14,11 @@ body, html {
   margin: 10px auto;
 }
 
+.logo_title img {
+  display:block;
+  margin: auto;
+}
+
 .gauge {
   position: relative;
   margin: 0 0.8em;
@@ -28,7 +33,7 @@ body, html {
 
 .gauge > .title {
   text-transform: uppercase;
-  top: 1.2em;
+  top: 1.3em;
 }
 
 .title {
@@ -59,13 +64,12 @@ body, html {
   font-weight: 300;
   font-size:6.5em;
   margin-top: -80px;
-  line-height: 120px;
   letter-spacing: -5px
 }
 
 .percentage .symbol {
   font-size: 0.5em;
-  vertical-align: text-top;
+  vertical-align: middle;
 }
 
 .infoAbsolute .remaining {
@@ -181,7 +185,7 @@ body, html {
 }
 
 .axis text {
-  font-size: 14px;
+  font-size: 10px;
   fill: #BFA995;
   text-transform: uppercase;
 }
@@ -237,4 +241,46 @@ body, html {
   display: block;
   max-width: 100%;
   overflow: hidden;
+}
+
+.user {
+  margin: 10px;
+  font-size:12px;
+  opacity: 0.7;
+  padding: 5px;
+}
+
+.logout.btn {
+  background: transparent;
+  /*border: 1px solid #2F2E2C;*/
+  font-size:10px;
+  /*opacity: 0.5;*/
+}
+
+@media(min-width: 600px) {
+  .container {
+    width: auto;
+    max-width: none;
+    margin: 0 2em;
+  }
+
+  .screen.main, .screen.stats {
+    width:50%;
+    float:left;
+    box-sizing: border-box;
+    padding: 0 2em;
+  }
+
+  .screen.login {
+    max-width: 550px;
+    margin: 0 auto;
+  }
+
+  .navBtn {
+    display: none;
+  }
+
+  .stats .title {
+    display: none;
+  }
 }

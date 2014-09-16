@@ -13,7 +13,16 @@
 
     <div class="container">
 
+        <span class="user" style="float:left">
+        </span>
+
+        <a href="" class="logout btn" style="float:right; display:none">
+            Logout
+        </a>
+
         <h1 class="logo_title"><img alt="Proteus" src="img/logo.svg" class="logo_img"></h1>
+
+        <br style="height:0; clear:both;">
 
         <div class="login screen">
             <form>
@@ -37,7 +46,7 @@
                 <svg id="gaugeSvg">
                     <defs>
                         <pattern id="grad" x="0" y="0" width="1" height="1">
-                            <image xlink:href="img/grad.png"></image>
+                            <image id="gradientImage" x="0" y="0" width="550" height="550" xlink:href="img/grad.png" style="z-index:10"></image>
                         </pattern>
                         <filter id="blur">
                             <feGaussianBlur stdDeviation="2"></feGaussianBlur>
@@ -99,7 +108,7 @@
             </div>
 
             <div class="row center">
-                <a href="#" class="btn" id="btnStat">
+                <a href="#" class="btn navBtn" id="btnStat">
                     <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g fill="#838281">
                             <path d="M4.78291667,14.3556585 L1.52083333,14.3556585 L1.52083333,10.8434634 L4.7825,10.8434634 L4.7825,14.3556585 L4.78291667,14.3556585 Z M9.34625,14.3556585 L6.08416667,14.3556585 L6.08416667,7.46780488 L9.34625,7.46780488 L9.34625,14.3556585 L9.34625,14.3556585 Z M13.90875,14.3556585 L10.6470833,14.3556585 L10.6470833,3.546 L13.90875,3.546 L13.90875,14.3556585 L13.90875,14.3556585 Z M18.4720833,14.3556585 L15.2104167,14.3556585 L15.2104167,0 L18.4720833,0 L18.4720833,14.3556585 L18.4720833,14.3556585 Z M20,15.7530732 L0,15.7530732 L0,18.054439 L20,18.054439 L20,15.7530732 L20,15.7530732 Z" id="bar_chart_3_icon" sketch:type="MSShapeGroup"></path>
@@ -122,14 +131,8 @@
             <div class="graph">
             </div>
 
-            <div class="listCont">
-            <table class="list">
-
-            </table>
-            </div>
-
             <div class="row center">
-                <a href="#" class="btn" id="btnGauge">
+                <a href="#" class="btn navBtn" id="btnGauge">
                     <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <path d="M0,9.99278351 C0,4.48273196 4.48273196,0 9.99278351,0 C15.5027835,0 19.9854639,4.48273196 19.9854639,9.99278351 C19.9854639,15.5027835 15.502732,19.9855155 9.99278351,19.9855155 C4.48273196,19.9855155 0,15.5027835 0,9.99278351 Z M1.75257732,9.99278351 C1.75257732,14.5363918 5.44912371,18.2329381 9.99278351,18.2329381 C14.5363918,18.2329381 18.2328866,14.5363918 18.2328866,9.99278351 C18.2329381,5.44912371 14.5364433,1.75257732 9.99278351,1.75257732 C5.44912371,1.75257732 1.75257732,5.44912371 1.75257732,9.99278351 Z" id="Shape" fill="#838281" sketch:type="MSShapeGroup"></path>
@@ -143,6 +146,14 @@
                     </svg>
                 </a>
             </div>
+
+            <div class="listCont">
+            <table class="list">
+
+            </table>
+            </div>
+
+
         </div>
 
     </div>
