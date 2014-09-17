@@ -488,7 +488,7 @@
   }
 
   function isBigScreen() {
-    return $(window).width() > 800;
+    return $(window).width() > 600;
   }
 
   $(function() {
@@ -503,6 +503,16 @@
     $('#btnGauge').on('click', function (e) {
       e.preventDefault();
       showScreen('main');
+    });
+
+
+    var reinit;
+    $(window).on('resize', function () {
+      clearTimeout(reinit);
+      reinit = setTimeout(function () {
+          setupMain.done = false;
+          init();
+      }, 800);
     });
 
     init();
