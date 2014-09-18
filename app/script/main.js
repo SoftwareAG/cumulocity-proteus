@@ -24,7 +24,7 @@
       arc = d3.svg.arc()
         .outerRadius(radius)
         .innerRadius(radius - width)
-        .startAngle(scale.range()[0]);
+        .startAngle(scale.range()[0]),
 
       arc2 = d3.svg.arc()
         .outerRadius(radius)
@@ -252,6 +252,8 @@
       drawMainData(data.managedObjects[0] || {});
       if (isBigScreen()) {
         showScreen('stats', true);
+      } else {
+
       }
     });
   }
@@ -421,7 +423,6 @@
       TOKEN = token;
       saveToken(token);
       showScreen('main');
-      setupMain();
       displayUser();
       return data;
     });
@@ -492,8 +493,6 @@
   }
 
   $(function() {
-    var main = $('.main'),
-      stats = $('.stats');
 
     $('#btnStat').on('click', function (e) {
       e.preventDefault();
