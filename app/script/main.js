@@ -309,7 +309,7 @@
 
       graphData.forEach(function (m) {
         var d = m.date,
-          ref = d.format('YYYYMMDD');
+          ref = d.format('YYYYMM');
         map[ref] = {
           val: m.val,
           date: d
@@ -323,7 +323,7 @@
 
       keys.forEach(function (ref) {
         tableData.push({
-          ref: map[ref].date.format('DD MMM'),
+          ref: map[ref].date.format('MMM'),
           date: map[ref].date,
           val: map[ref].val
         });
