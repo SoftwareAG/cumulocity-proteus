@@ -79,7 +79,19 @@
     };
   }
 
+  function hideSpinner() {
+    $('.spinner').hide();
+  }
+
+  function showSpinner() {
+    $('.graph svg').remove();
+    $('.spinner').show();
+    $('.list').empty();
+  }
+
   function drawGraph(data) {
+    hideSpinner();
+
     var root = d3.select('div.graph'),
       width = $('div.graph').width(),
       height = width * (3/4),
@@ -284,15 +296,8 @@
   }
 
   function setupStats() {
-    // var graphData = [
-    //   {month: 0, val: 20},
-    //   {month: 1, val: 24},
-    //   {month: 2, val: 60},
-    //   {month: 3, val: 60},
-    //   {month: 4, val: 100},
-    //   {month: 5, val: 90},
-    //   {month: 6, val: 80},
-    // ];
+
+    showSpinner();
 
     getMeasurementData().success(function (data) {
       var measurements = data.measurements,
