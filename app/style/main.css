@@ -11,7 +11,7 @@ body, html {
 
 .logo_title {
   width: 27%;
-  margin: 10px auto;
+  margin: 20px auto 10px auto;
 }
 
 .logo_title img {
@@ -140,6 +140,11 @@ body, html {
   margin: 10px auto;
 }
 
+.cancel_btn {
+  background: transparent;
+  border: 1px solid #2F2E2C;
+}
+
 .btn svg {
   fill: #838281;
   margin-right: 5px;
@@ -209,22 +214,25 @@ body, html {
   margin: 0 auto;
 }
 
-.login {
+.login, .changePassword {
   margin: 50px;
   text-align: center;
 }
 
-.login label {
+.login label, .changePassword label {
   text-transform: uppercase;
 }
 
 .login input,
-.login button {
+.login button,
+.changePassword input,
+.changePassword button {
   border: 1px solid #CCC;
   display: block;
 }
 
-.login input {
+.login input,
+.changePassword input{
   padding: 10px;
   width: 100%;
   margin: 5px 0 20px 0;
@@ -232,7 +240,8 @@ body, html {
   box-sizing: border-box;
 }
 
-.login button {
+.login button,
+.changePassword button {
   padding: 10px 40px;
 }
 
@@ -243,19 +252,19 @@ body, html {
   overflow: hidden;
 }
 
-.user {
-  margin: 10px;
+.user, .btn_logout {
+  margin: 0 10px;
+  margin-top: -4px;
   font-size:12px;
   opacity: 0.7;
-  padding: 5px;
+  padding: 2px 10px;
+  text-decoration: none;
+  color: #A5A19B;
+  border: 1px solid #A5A19B;
+  text-transform: uppercase;
+  display: none;
 }
 
-.logout.btn {
-  background: transparent;
-  /*border: 1px solid #2F2E2C;*/
-  font-size:10px;
-  /*opacity: 0.5;*/
-}
 
 @media(min-width: 800px) {
   .container {

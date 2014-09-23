@@ -13,10 +13,10 @@
 
     <div class="container">
 
-        <span class="user" style="float:left">
-        </span>
+        <a href="" class="user" style="float:left">
+        </a>
 
-        <a href="" class="logout btn" style="float:right; display:none">
+        <a href="" class="btn_logout logout" style="float:right; display:none">
             Logout
         </a>
 
@@ -39,13 +39,14 @@
 
         <div class="changePassword screen">
             <form>
-                <label>Current Password</label>
+                <label>Aktuelles Passwort</label>
                 <input type="password" name="currentPassword">
-                <label>New Password</label>
-                <input type="password" name="newpassword">
-                <label>Confirm Password</label>
-                <input type="password" name="newpassword">
-                <button class="submit btn">Change password</button>
+                <label>neues Passwort</label>
+                <input type="password" name="newPassword">
+                <label>Bestätigen Sie das neue Kennwort</label>
+                <input type="password" name="newPasswordConfirm">
+                <button class="submit btn">Kennwort ändern</button>
+                <button type="button" class="submit btn cancel_btn">stornieren</button>
             </form>
         </div>
 

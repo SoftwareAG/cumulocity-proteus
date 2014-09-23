@@ -378,7 +378,8 @@
       Authorization: 'Basic ' + t,
       UseXBasic: true,
       // 'X-Cumulocity-Application-Key': 'devicemanagement-application-key',
-      Accept: 'application/vnd.com.nsn.cumulocity.user+json;'
+      Accept: 'application/vnd.com.nsn.cumulocity.user+json;',
+      'Content-type': 'application/vnd.com.nsn.cumulocity.user+json;'
     };
   }
 
@@ -398,23 +399,28 @@
     if (!tenant && TENANT) {
       tenant = TENANT;
     }
+    var token = buildToken(user, pass, tenant);
+    TOKEN = token;
 
-    var token = btoa(
+    getUser(token).then(function () {
+      USER.pass = pass;
+    }, function (data) {
+      alert('ungültige Anmeldeinformationen');
+    });
+  }
+
+  function buildToken(user, pass, tenant) {
+    return btoa(
       (tenant ? tenant + '/' : '') +
       user + ':' +
       pass
     );
-    TOKEN = token;
-
-    getUser(token).then(function () {}, function (data) {
-      alert('ungültige Anmeldeinformationen');
-    });
   }
 
   function logout() {
     clearToken();
     $('.logout').hide();
-    $('.user').text('');
+    $('.user').text('').hide();
     showScreen('login');
   }
 
@@ -448,8 +454,60 @@
     });
   }
 
+  function setupChangePassword() {
+    var ERROR_SIZE = 'Das Passwort muss größer als 6 Zeichen lang sein',
+      ERROR_OLD_PASSWORD = 'Aktuelle Passwort ist nicht korrekt',
+      ERROR_PASSWORD_MATCH = 'Neues Passwort und Passwortbestätigung stimmen nicht überein',
+      PASSWORD_CHANGED = 'Kennwort geändert';
+
+    $('.changePassword form').on('submit', function(e) {
+      e.preventDefault();
+      var form = $(this),
+        currentPassword = form.find('[name=currentPassword]').val(),
+        newPassword = form.find('[name=newPassword]').val(),
+        newPasswordConfirm = form.find('[name=newPasswordConfirm]').val();
+
+      if (newPassword.length < 6) {
+        return alert(ERROR_SIZE);
+      }
+
+      if (newPassword !== newPasswordConfirm) {
+        return alert(ERROR_PASSWORD_MATCH);
+      }
+
+      $.ajax({
+        url: URL_BASE  + '/user/currentUser',
+        headers: getHeaders(buildToken(USER.userName, currentPassword, TENANT))
+      }).then(function () {
+        updatePassword(newPassword).then(function() {
+          alert(PASSWORD_CHANGED);
+        });
+      }, function() {
+        alert(ERROR_OLD_PASSWORD);
+      });
+    });
+  }
+
+  function updatePassword(password) {
+    // var url = URL_BASE + '/user/' + TENANT + '/users/' + USER.userName;
+    var url = URL_BASE + '/user/currentUser';
+    return  $.ajax({
+      url : url,
+      type: 'PUT',
+      data: JSON.stringify({password: password}),
+      headers: getHeaders(getToken())
+    }).then(function () {
+      return login(USER.userName, password, TENANT);
+    });
+  }
+
   function displayUser() {
-    $('.user').text(USER.userName);
+    $('.user').text(USER.userName)
+      .show()
+      .on('click', function (e) {
+        e.preventDefault();
+        showScreen('changePassword');
+      });
     $('.logout')
       .show()
       .on('click', function (e) {
@@ -463,10 +521,17 @@
     $('.screen').hide();
   }
 
+  function cleanFields() {
+    $('.changePassword input').each(function () {
+      $(this).val('');
+    });
+  }
+
   function showScreen(scr, noHide) {
     var actions = {
       main: setupMain,
-      stats: setupStats
+      stats: setupStats,
+      changePassword: cleanFields
     };
 
 
@@ -485,6 +550,7 @@
     var t = getToken();
     hideScreens();
     setupLogin();
+    setupChangePassword();
 
     if (t) {
       getUser(t).then(function () {}, function () {
@@ -494,6 +560,8 @@
       showScreen('login');
     }
   }
+
+
 
   function isBigScreen() {
     return $(window).width() > 600;
@@ -507,6 +575,11 @@
     });
 
     $('#btnGauge').on('click', function (e) {
+      e.preventDefault();
+      showScreen('main');
+    });
+
+    $('.cancel_btn').on('click', function (e) {
       e.preventDefault();
       showScreen('main');
     });
