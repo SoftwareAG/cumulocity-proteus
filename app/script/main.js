@@ -586,11 +586,16 @@
 
 
     var reinit;
+    var screenWidth = $(window).width();
     $(window).on('resize', function () {
       clearTimeout(reinit);
       reinit = setTimeout(function () {
-          setupMain.done = false;
-          init();
+          if (screenWidth !== $(window).width()) {
+            screenWidth = $(window).width();
+            setupMain.done = false;
+            init();
+          }
+
       }, 800);
     });
 

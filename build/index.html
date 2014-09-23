@@ -13,10 +13,10 @@
 
     <div class="container">
 
-        <span class="user" style="float:left">
-        </span>
+        <a href="" class="user" style="float:left">
+        </a>
 
-        <a href="" class="logout btn" style="float:right; display:none">
+        <a href="" class="btn_logout logout" style="float:right; display:none">
             Logout
         </a>
 
@@ -30,7 +30,23 @@
                 <input name="username" autocorrect="off" autocapitalize="off">
                 <label>Password</label>
                 <input type="password" name="password">
+                <label>
+                  <input type="checkbox" name="remember" style="width:auto;display:inline-block;"> Remember me
+                </label>
                 <button class="submit btn">Login</button>
+            </form>
+        </div>
+
+        <div class="changePassword screen">
+            <form>
+                <label>Aktuelles Passwort</label>
+                <input type="password" name="currentPassword">
+                <label>neues Passwort</label>
+                <input type="password" name="newPassword">
+                <label>Bestätigen Sie das neue Kennwort</label>
+                <input type="password" name="newPasswordConfirm">
+                <button class="submit btn">Kennwort ändern</button>
+                <button type="button" class="submit btn cancel_btn">stornieren</button>
             </form>
         </div>
 
@@ -129,6 +145,10 @@
             <h2 class="title beige center">Füllstand</h2>
 
             <div class="graph">
+                <div class="spinner">
+                  <div class="double-bounce1"></div>
+                  <div class="double-bounce2"></div>
+                </div>
             </div>
 
             <div class="row center">
