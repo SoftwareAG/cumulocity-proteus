@@ -564,7 +564,7 @@
 
 
   function isBigScreen() {
-    return $(window).width() > 600;
+    return $(window).width() > 800;
   }
 
   $(function() {
