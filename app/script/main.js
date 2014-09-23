@@ -426,7 +426,9 @@
     }).then(function (data) {
       USER = data;
       TOKEN = token;
-      saveToken(token);
+      if ($('[name=remember]:checked').length) {
+        saveToken(token);
+      }
       showScreen('main');
       displayUser();
       return data;
