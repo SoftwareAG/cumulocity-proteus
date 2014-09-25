@@ -42,6 +42,7 @@ module.exports = function (grunt) {
           'app/bower_components/moment/moment.js',
           'app/bower_components/moment/locale/de.js',
           'app/bower_components/jquery/dist/jquery.js',
+          'app/bower_components/touche/src/touche.js',
           'app/script/main.js'
         ]
       }

@@ -405,7 +405,7 @@
     getUser(token).then(function () {
       USER.pass = pass;
     }, function (data) {
-      alert('ungültige Anmeldeinformationen');
+      alert('Ungültige Anmeldeinformationen');
     });
   }
 
@@ -456,7 +456,7 @@
 
   function setupChangePassword() {
     var ERROR_SIZE = 'Das Passwort muss größer als 6 Zeichen lang sein',
-      ERROR_OLD_PASSWORD = 'Aktuelle Passwort ist nicht korrekt',
+      ERROR_OLD_PASSWORD = 'Aktuelles Passwort ist nicht korrekt',
       ERROR_PASSWORD_MATCH = 'Neues Passwort und Passwortbestätigung stimmen nicht überein',
       PASSWORD_CHANGED = 'Kennwort geändert';
 
@@ -570,8 +570,8 @@
   $(function() {
 
     $('#btnStat').on('click', function (e) {
-      e.preventDefault();
       showScreen('stats');
+      e.preventDefault();
     });
 
     $('#btnGauge').on('click', function (e) {
