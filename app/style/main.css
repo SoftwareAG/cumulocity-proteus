@@ -265,6 +265,12 @@ body, html {
   display: none;
 }
 
+.user {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .screen {
   display:none;
 }
