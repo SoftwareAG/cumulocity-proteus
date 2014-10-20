@@ -125,7 +125,7 @@ body, html {
 }
 
 .row:after, .staticInfo:after {
-  content: '<br>',
+  content: '';
   clear: both;
 }
 
