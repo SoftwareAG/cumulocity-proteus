@@ -383,15 +383,17 @@
     };
   }
 
-  function saveToken(token) {
-    window.localStorage.setItem('t', token);
+  function saveToken(token, permanent) {
+    var mode = permanent ? 'localStorage' : 'sessionStorage';
+    window[mode].setItem('t', token);
   }
 
   function getToken() {
-    return window.localStorage.getItem('t');
+    return window.localStorage.getItem('t') ||  window.sessionStorage.getItem('t');
   }
 
   function clearToken() {
+    window.sessionStorage.getItem('t');
     return window.localStorage.removeItem('t');
   }
 
@@ -432,9 +434,7 @@
     }).then(function (data) {
       USER = data;
       TOKEN = token;
-      if ($('[name=remember]:checked').length) {
-        saveToken(token);
-      }
+      saveToken(token, !!$('[name=remember]:checked').length);
       showScreen('main');
       displayUser();
       return data;
