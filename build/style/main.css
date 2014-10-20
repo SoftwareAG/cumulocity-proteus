@@ -125,7 +125,7 @@ body, html {
 }
 
 .row:after, .staticInfo:after {
-  content: '<br>',
+  content: '';
   clear: both;
 }
 
@@ -263,6 +263,12 @@ body, html {
   border: 1px solid #A5A19B;
   text-transform: uppercase;
   display: none;
+}
+
+.user {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .screen {
