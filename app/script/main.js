@@ -243,7 +243,7 @@
   }
 
   function setLastUpdate(lastUpdate) {
-    var txt = moment(lastUpdate).format('DD MMM YYYY hh:mm');
+    var txt = moment(lastUpdate).format('DD MMMM YYYY hh:mm');
     $('.lastUpdate .info').text(txt);
   }
 
