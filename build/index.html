@@ -7,7 +7,6 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-        <meta name="HandheldFriendly" content="True">
 
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,12 +21,9 @@
 
     <div class="container">
 
-        <a href="" class="user" style="float:left">
-        </a>
+        <a href="" class="user" style="float:left"></a>
 
-        <a href="" class="btn_logout logout" style="float:right; display:none">
-            Logout
-        </a>
+        <a href="" class="btn_logout logout" style="float:right; display:none">Logout</a>
 
         <h1 class="logo_title"><img alt="Proteus" src="img/logo.svg" class="logo_img"></h1>
 
@@ -118,6 +114,22 @@
 
             </div>
 
+            <div class="row center">
+                <a class="btn navBtn" id="btnStat" href="">
+                    <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g fill="#838281">
+                            <path d="M4.78291667,14.3556585 L1.52083333,14.3556585 L1.52083333,10.8434634 L4.7825,10.8434634 L4.7825,14.3556585 L4.78291667,14.3556585 Z M9.34625,14.3556585 L6.08416667,14.3556585 L6.08416667,7.46780488 L9.34625,7.46780488 L9.34625,14.3556585 L9.34625,14.3556585 Z M13.90875,14.3556585 L10.6470833,14.3556585 L10.6470833,3.546 L13.90875,3.546 L13.90875,14.3556585 L13.90875,14.3556585 Z M18.4720833,14.3556585 L15.2104167,14.3556585 L15.2104167,0 L18.4720833,0 L18.4720833,14.3556585 L18.4720833,14.3556585 Z M20,15.7530732 L0,15.7530732 L0,18.054439 L20,18.054439 L20,15.7530732 L20,15.7530732 Z" id="bar_chart_3_icon" sketch:type="MSShapeGroup"></path>
+                        </g>
+                    </svg>
+                    Messungen
+                    <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g fill="#838281">
+                            <path d="M12.481,9.361 C12.575,9.453 12.622,9.562 12.622,9.686 C12.622,9.811 12.575,9.919 12.481,10.012 L9.264,13.225 C9.172,13.317 9.065,13.364 8.942,13.364 C8.819,13.364 8.711,13.317 8.618,13.225 L8.139,12.746 C8.047,12.653 8,12.545 8,12.422 C8,12.299 8.047,12.192 8.139,12.1 L10.573,9.667 L8.139,7.264 C8.047,7.171 8,7.065 8,6.946 C8,6.827 8.047,6.72 8.139,6.628 L8.618,6.14 C8.711,6.046 8.819,6 8.944,6 C9.069,6 9.176,6.046 9.264,6.139 L12.481,9.361 L12.481,9.361 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+
             <div class="row staticInfo">
                 <div class="info serialNr">
                     <h3 class="title beige bold">Gerätenr.</h3>
@@ -133,21 +145,7 @@
                 </div>
             </div>
 
-            <div class="row center">
-                <a href="http://sapo.pt" class="btn navBtn" id="btnStat">
-                    <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g fill="#838281">
-                            <path d="M4.78291667,14.3556585 L1.52083333,14.3556585 L1.52083333,10.8434634 L4.7825,10.8434634 L4.7825,14.3556585 L4.78291667,14.3556585 Z M9.34625,14.3556585 L6.08416667,14.3556585 L6.08416667,7.46780488 L9.34625,7.46780488 L9.34625,14.3556585 L9.34625,14.3556585 Z M13.90875,14.3556585 L10.6470833,14.3556585 L10.6470833,3.546 L13.90875,3.546 L13.90875,14.3556585 L13.90875,14.3556585 Z M18.4720833,14.3556585 L15.2104167,14.3556585 L15.2104167,0 L18.4720833,0 L18.4720833,14.3556585 L18.4720833,14.3556585 Z M20,15.7530732 L0,15.7530732 L0,18.054439 L20,18.054439 L20,15.7530732 L20,15.7530732 Z" id="bar_chart_3_icon" sketch:type="MSShapeGroup"></path>
-                        </g>
-                    </svg>
-                    Messungen
-                    <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g fill="#838281">
-                            <path d="M12.481,9.361 C12.575,9.453 12.622,9.562 12.622,9.686 C12.622,9.811 12.575,9.919 12.481,10.012 L9.264,13.225 C9.172,13.317 9.065,13.364 8.942,13.364 C8.819,13.364 8.711,13.317 8.618,13.225 L8.139,12.746 C8.047,12.653 8,12.545 8,12.422 C8,12.299 8.047,12.192 8.139,12.1 L10.573,9.667 L8.139,7.264 C8.047,7.171 8,7.065 8,6.946 C8,6.827 8.047,6.72 8.139,6.628 L8.618,6.14 C8.711,6.046 8.819,6 8.944,6 C9.069,6 9.176,6.046 9.264,6.139 L12.481,9.361 L12.481,9.361 Z" id="Shape" sketch:type="MSShapeGroup"></path>
-                        </g>
-                    </svg>
-                </a>
-            </div>
+
 
         </div>
 
@@ -192,7 +190,6 @@
         <script src="bower_components/moment/moment.js"></script>
         <script src="bower_components/moment/locale/de.js"></script>
         <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/touche/dist/touche.min.js"></script>
         <script src="script/main.js"></script>
 
     </body>
