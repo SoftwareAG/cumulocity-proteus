@@ -243,7 +243,7 @@
   }
 
   function setLastUpdate(lastUpdate) {
-    var txt = moment(lastUpdate).format('YYYY MMM DD HH:mm');
+    var txt = moment(lastUpdate).format('DD MMM YYYY hh:mm');
     $('.lastUpdate .info').text(txt);
   }
 
@@ -569,9 +569,15 @@
 
   $(function() {
 
-    $('#btnStat').on('click', function (e) {
-      showScreen('stats');
+    $('#btnStatA').on('click', function (e) {
       e.preventDefault();
+      showScreen('stats');
+    });
+
+
+    $('#btnStat').on('click', function (e) {
+      e.preventDefault();
+      showScreen('stats');
     });
 
     $('#btnGauge').on('click', function (e) {
