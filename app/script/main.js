@@ -354,8 +354,8 @@
   }
 
   function getMeasurementData() {
-    var days = 360,
-      dateFrom = moment().subtract(days, 'days').format('YYYY-MM-DD'),
+    var months = 12,
+      dateFrom = moment().subtract(months, 'months').format('YYYY-MM-DD'),
       dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
       url = URL_BASE + '/measurement/measurements/?' +
         'pageSize=5000' +
