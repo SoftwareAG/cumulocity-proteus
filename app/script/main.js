@@ -3,7 +3,14 @@
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
     deviceId = '22600',
     URL_BASE = '',
-    TENANT = 'innotecmk',
+    TENANT = (function() {
+      var tenant = 'proteus',
+        hostSplit = window.location.host.split('.');
+      if (hostSplit.length > 2 && hostSplit[0].match(/\w/)) {
+        tenant = hostSplit[0];
+      }
+      return tenant;
+    })(),
     DEVICE_ID = '78200',
     DEVICE_DATA = {},
     USER;
