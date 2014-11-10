@@ -1,7 +1,6 @@
 (function () {
   var setGauge,
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
-    deviceId = '22600',
     URL_BASE = '',
     TENANT = (function() {
       var tenant = 'proteus',
@@ -11,7 +10,6 @@
       }
       return tenant;
     })(),
-    DEVICE_ID = '78200',
     DEVICE_DATA = {},
     APP_KEY = 'proteus-appkey-8668840797618032',
     USER;
@@ -351,7 +349,6 @@
   }
 
   function getMainData() {
-    var moID = DEVICE_ID;
     var url = URL_BASE + '/inventory/managedObjects/?fragmentType=c8y_TankConfiguration&pageSize=1';
     return $.ajax({
       url: url,
