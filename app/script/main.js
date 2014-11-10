@@ -352,9 +352,7 @@
     var url = URL_BASE + '/inventory/managedObjects/?fragmentType=c8y_TankConfiguration&pageSize=1';
     return $.ajax({
       url: url,
-      headers:  {
-        Authorization: 'Basic ' + TOKEN
-      }
+      headers: getHeadersNoContent()
     });
   }
 
@@ -371,9 +369,7 @@
 
     return $.ajax({
       url: url,
-      headers: {
-        Authorization: 'Basic ' + TOKEN
-      }
+      headers: getHeadersNoContent()
     });
   }
 
@@ -386,6 +382,13 @@
       Accept: 'application/vnd.com.nsn.cumulocity.user+json;',
       'Content-type': 'application/vnd.com.nsn.cumulocity.user+json;'
     };
+  }
+
+  function getHeadersNoContent(_token) {
+    var h = getHeaders(_token);
+    delete h['Content-type'];
+    delete h.Accept;
+    return h;
   }
 
   function saveToken(token, permanent) {
