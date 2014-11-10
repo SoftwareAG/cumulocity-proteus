@@ -13,6 +13,7 @@
     })(),
     DEVICE_ID = '78200',
     DEVICE_DATA = {},
+    APP_KEY = 'proteus-appkey-8668840797618032',
     USER;
 
   function drawCircle(size) {
@@ -250,7 +251,7 @@
   }
 
   function setLastUpdate(lastUpdate) {
-    var txt = moment(lastUpdate).format('DD MMMM YYYY hh:mm');
+    var txt = moment(lastUpdate).format('DD MMMM YYYY HH:mm');
     $('.lastUpdate .info').text(txt);
   }
 
@@ -384,7 +385,7 @@
     return {
       Authorization: 'Basic ' + t,
       UseXBasic: true,
-      // 'X-Cumulocity-Application-Key': 'devicemanagement-application-key',
+      'X-Cumulocity-Application-Key': APP_KEY,
       Accept: 'application/vnd.com.nsn.cumulocity.user+json;',
       'Content-type': 'application/vnd.com.nsn.cumulocity.user+json;'
     };
