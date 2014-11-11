@@ -293,7 +293,7 @@
     setRemaining(remaining + 'L');
 
     setGauge(Math.round(remaining / capacity * 100));
-    setLastUpdate(mo.lastUpdate);
+    setLastUpdate(mo.lastUpdated);
     setStaticInfo({
       serial: hw.serialNumber,
       vol: capacity + 'L',
