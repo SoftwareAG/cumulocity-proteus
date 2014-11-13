@@ -305,7 +305,8 @@
 
     showSpinner();
 
-    getMeasurementData().success(function (data) {
+//    getMeasurementData().success(function (data) {
+    getSeriesData().success(function (data) {
       var measurements = data.measurements,
         map = {},
         graphData = measurements.map(function (m) {
@@ -370,6 +371,50 @@
     return $.ajax({
       url: url,
       headers: getHeadersNoContent()
+    });
+  }
+  
+  function getSeriesData() {
+    var months = 12,
+      dateFrom = moment().subtract(months, 'months').format('YYYY-MM-DD'),
+      dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
+      url = URL_BASE + '/measurement/measurements/series/?' +
+        'pageSize=5000' +
+        '&source=' + DEVICE_DATA.id +
+        '&dateFrom=' + dateFrom +
+        '&dateTo=' + dateTo;
+
+    return $.ajax({
+      url: url,
+      headers: getHeadersNoContent(),
+      dataFilter: function (data, type) {
+        data = JSON.parse(data);
+        
+        var seriesIndex = 0;
+        data.series.forEach(function (series, ix) {
+          if (series.type === 'c8y_TekelecRemainingFuel') {
+            seriesIndex = ix;
+          }
+        });
+        
+        var result = {};
+        result.measurements = [];
+        $.each(data.values, function (time, val) {
+          var value = val[seriesIndex] ? val[seriesIndex].min : null;
+          if ($.isNumeric(value)) {
+            result.measurements.push({
+              time: time,
+              c8y_TekelecRemainingFuel: {
+                capacity: {
+                  value: value
+                }
+              }
+            });
+          }
+        });
+        
+        return JSON.stringify(result);
+      }
     });
   }
 
