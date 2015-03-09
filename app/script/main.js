@@ -349,7 +349,7 @@
   }
 
   function getMainData() {
-    var url = URL_BASE + '/inventory/managedObjects/?fragmentType=c8y_TankConfiguration&pageSize=1';
+    var url = URL_BASE + '/inventory/managedObjects/?fragmentType=c8y_TankConfiguration&pageSize=100';
     return $.ajax({
       url: url,
       headers: getHeadersNoContent()
