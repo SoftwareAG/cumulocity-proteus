@@ -212,10 +212,12 @@
   }
 
   function setCapacity(capacity) {
+    capacity = Math.round(capacity);
     $('.infoAbsolute .capacity').text(capacity);
   }
 
   function setRemaining(remaining) {
+    remaining = Math.round(remaining);
     $('.infoAbsolute .remaining').text(remaining);
   }
 
