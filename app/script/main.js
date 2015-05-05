@@ -212,12 +212,10 @@
   }
 
   function setCapacity(capacity) {
-    capacity = Math.round(capacity);
     $('.infoAbsolute .capacity').text(capacity);
   }
 
   function setRemaining(remaining) {
-    remaining = Math.round(remaining);
     $('.infoAbsolute .remaining').text(remaining);
   }
 
@@ -283,8 +281,8 @@
 
     var signal = mo.c8y_SignalStrength.rssi.value,
       battery = mo.c8y_Battery.level.value,
-      capacity = mo.c8y_TankConfiguration.capacity.usable,
-      remaining = mo.c8y_TekelecRemainingFuel.capacity.value,
+      capacity = Math.round(mo.c8y_TankConfiguration.capacity.usable),
+      remaining = Math.round(mo.c8y_TekelecRemainingFuel.capacity.value),
       hw = mo.c8y_Hardware,
       fuel = mo.c8y_TankConfiguration.fuel;
 
