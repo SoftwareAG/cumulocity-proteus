@@ -305,9 +305,8 @@
 
     showSpinner();
 
-    getMeasurementData().success(function (data) {
-      var measurements = data.measurements,
-        map = {},
+    getMeasurements().then(function (measurements) {
+      var map = {},
         graphData = measurements.map(function (m) {
           var d = moment(m.time);
 
@@ -356,21 +355,47 @@
     });
   }
 
-  function getMeasurementData() {
-    var months = 12,
+  function getMeasurements() {
+    var deferred = $.Deferred(),
+      months = 4,
       dateFrom = moment().subtract(months, 'months').format('YYYY-MM-DD'),
       dateTo = moment().add(1, 'days').format('YYYY-MM-DD'),
       url = URL_BASE + '/measurement/measurements/?' +
-        'pageSize=5000' +
+        'pageSize=2000' +
         '&source=' + DEVICE_DATA.id +
         '&dateFrom=' + dateFrom +
         '&dateTo=' + dateTo +
         '&type=c8y_TekelecRemainingFuel';
+    
+    getMeasurementsFromUrl([], url)
+      .then(function (measurements) {
+        deferred.resolve(measurements);
+      });
+    
+    return deferred.promise();
+  }
+  
+  function getMeasurementsFromUrl(measurements, url) {
+    var deferred = $.Deferred();
 
-    return $.ajax({
+    $.ajax({
       url: url,
       headers: getHeadersNoContent()
+    }).success(function (res) {
+      $.each(res.measurements, function (i, measurement) {
+        measurements.push(measurement);
+      });
+      if (res.measurements.length) {
+        getMeasurementsFromUrl(measurements, res.next)
+          .then(function () {
+            deferred.resolve(measurements);
+          });
+      } else {
+        deferred.resolve(measurements);
+      }
     });
+
+    return deferred.promise();
   }
 
   function getHeaders(_token) {
