@@ -4,6 +4,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-processhtml');
 
   function proxy(path) {
     return {
@@ -34,6 +35,14 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.config('processhtml', {
+    build: {
+      files: {
+        'build/index.html': ['app/index.html']
+      }
+    }
+  });
+
   grunt.config('uglify', {
     build: {
       files: {
@@ -56,7 +65,7 @@ module.exports = function (grunt) {
           expand: true,
           dest: 'build/',
           cwd: 'app',
-          src: ['img/logo.svg','img/grad.png', 'style/main.css', 'index.html']
+          src: ['img/logo.svg','img/grad.png', 'style/main.css']
         }
       ]
     }
@@ -68,6 +77,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'processhtml',
     'uglify',
     'copy'
   ]);
