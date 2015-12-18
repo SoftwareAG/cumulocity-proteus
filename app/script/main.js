@@ -366,15 +366,15 @@
         '&dateFrom=' + dateFrom +
         '&dateTo=' + dateTo +
         '&type=c8y_TekelecRemainingFuel';
-    
+
     getMeasurementsFromUrl([], url)
       .then(function (measurements) {
         deferred.resolve(measurements);
       });
-    
+
     return deferred.promise();
   }
-  
+
   function getMeasurementsFromUrl(measurements, url) {
     var deferred = $.Deferred();
 
@@ -511,8 +511,8 @@
       $.ajax({
         url: URL_BASE  + '/user/currentUser',
         headers: getHeaders(buildToken(USER.userName, currentPassword, TENANT))
-      }).then(function () {
-        updatePassword(newPassword).then(function() {
+      }).then(function (currentUser) {
+        updatePassword(currentUser, newPassword).then(function() {
           alert(PASSWORD_CHANGED);
         });
       }, function() {
@@ -521,13 +521,17 @@
     });
   }
 
-  function updatePassword(password) {
-    // var url = URL_BASE + '/user/' + TENANT + '/users/' + USER.userName;
+  function updatePassword(currentUser, password) {
     var url = URL_BASE + '/user/currentUser';
+    delete currentUser.id;
+    delete currentUser.userName;
+    delete currentUser.self;
+    delete currentUser.lastPasswordChange;
+    currentUser.password = password;
     return  $.ajax({
       url : url,
       type: 'PUT',
-      data: JSON.stringify({password: password}),
+      data: JSON.stringify(currentUser),
       headers: getHeaders(getToken())
     }).then(function () {
       return login(USER.userName, password, TENANT);
@@ -641,4 +645,3 @@
     init();
   });
 }());
-
