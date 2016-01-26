@@ -349,3 +349,40 @@ body, html {
   }
 }
 /*spinner end*/
+
+.proteus .selectboxit-container {
+  width: 80%;
+}
+
+.proteus .selectboxit-container .selectboxit, .proteus .selectboxit-container .selectboxit-options {
+  width: 100%;
+}
+
+.proteus .selectboxit-text {
+  width: 60%;
+}
+
+.proteus .selectboxit-container > .selectboxit {
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #A5A19B;
+  border-radius: 0;
+}
+
+.proteus .selectboxit-container span {
+  font: 14px Lato;
+  height: 22px;
+  line-height: 22px;
+}
+
+.proteus .selectboxit-container > .selectboxit-options a {
+  font: 14px Lato;
+  height: 22px;
+  line-height: 22px;
+}
+
+.proteus .selectboxit-container > .selectboxit-options {
+   background-color: transparent;
+   border: 1px solid #A5A19B;
+   border-radius: 0;
+}

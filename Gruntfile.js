@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   function proxy(path) {
     return {
       context: '/' + path,
-      host: 'innotecmk.cumulocity.com',
+      host: 'proteus.cumulocity.com',
       port: 80,
       https: false,
       xforward: false
