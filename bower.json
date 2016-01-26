@@ -15,7 +15,6 @@
   ],
   "dependencies": {
     "angularjs": "~1.2.22",
-    "jquery": "~2.1.1",
     "d3": "~3.4.11",
     "moment": "~2.8.2",
     "touche": "https://github.com/benhowdle89/touche.git",
