@@ -1,4 +1,5 @@
 (function () {
+  var deviceSelector = $("#device-selector").selectBoxIt({autoWidth: false});
   var setGauge,
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
     URL_BASE = '',
@@ -259,15 +260,38 @@
     $('.staticInfo .medium .val').text(info.medium);
   }
 
+  var MO;
   function setupMain() {
-
     if (!setupMain.done) {
       drawCircle($('#gauge').width());
       setupMain.done = true;
     }
 
     getMainData().success(function (data) {
-      drawMainData(data.managedObjects[0] || {});
+      var mo;
+      if (MO) {
+        mo = data.managedObjects.find(function (x) {
+          return x.id === MO.id;
+        });
+      } else {
+        mo = data.managedObjects[0];
+      }
+      drawMainData(mo || {});
+      deviceSelector.off('change');
+      deviceSelector.data('selectBox-selectBoxIt').refresh();
+      deviceSelector.data('selectBox-selectBoxIt').remove();
+      data.managedObjects.forEach(function (mo, idx) {
+        deviceSelector.data('selectBox-selectBoxIt')
+          .add({value: idx, text: mo.name});
+      });
+      deviceSelector.on('change', function () {
+        MO = data.managedObjects[$(this).val()];
+        drawMainData(MO);
+        if(!$('.stats').is(':hidden')) {
+          setupStats();
+        }
+      });
+
       if (isBigScreen()) {
         showScreen('stats', true);
       } else {
