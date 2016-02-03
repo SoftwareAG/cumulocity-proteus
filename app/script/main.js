@@ -260,6 +260,7 @@
     $('.staticInfo .medium .val').text(info.medium);
   }
 
+  var MO;
   function setupMain() {
     if (!setupMain.done) {
       drawCircle($('#gauge').width());
@@ -267,7 +268,7 @@
     }
 
     getMainData().success(function (data) {
-      var MO, mo;
+      var mo;
       if (MO) {
         mo = data.managedObjects.find(function (x) {
           return x.id === MO.id;
@@ -278,6 +279,7 @@
       drawMainData(mo || {});
       deviceSelector.off('change');
       deviceSelector.data('selectBox-selectBoxIt').refresh();
+      deviceSelector.data('selectBox-selectBoxIt').remove();
       data.managedObjects.forEach(function (mo, idx) {
         deviceSelector.data('selectBox-selectBoxIt')
           .add({value: idx, text: mo.name});
