@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     server: {
       options: {
         port: 9000,
-        hostname: '0.0.0.0',
+        hostname: '127.0.0.1',
         base: '',
         keepalive: true,
         middleware: function (connect, options) {

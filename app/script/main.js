@@ -446,12 +446,33 @@
   }
 
   function getToken() {
-    return window.localStorage.getItem('t') ||  window.sessionStorage.getItem('t');
+    return getTokenFromURL() || window.localStorage.getItem('t') ||  window.sessionStorage.getItem('t');
   }
 
   function clearToken() {
     window.sessionStorage.getItem('t');
     return window.localStorage.removeItem('t');
+  }
+
+  function getTokenFromURL(){
+    var url = location.search.substring(1);
+    var params = url.split('&');
+    var u;
+    var p;
+
+    for(var i=0; i<params.length; i++){
+      var attr = params[i].split('=');
+      if(attr[0] == 'u'){
+        u = attr[1];
+      } else if(attr[0] == 'p'){
+        p = attr[1];
+      }
+    }
+
+    if(u && p){
+      return buildToken(u, p, TENANT);
+    }
+    return null;
   }
 
   function login(user, pass, tenant) {
