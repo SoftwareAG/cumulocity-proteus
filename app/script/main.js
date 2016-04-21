@@ -450,8 +450,8 @@
   }
 
   function clearToken() {
-    window.sessionStorage.getItem('t');
-    return window.localStorage.removeItem('t');
+    window.sessionStorage.removeItem('t');
+    window.localStorage.removeItem('t');
   }
 
   function getTokenFromURL(){
