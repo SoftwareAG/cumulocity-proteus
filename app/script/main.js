@@ -12,7 +12,7 @@
       return tenant;
     })(),
     DEVICE_DATA = {},
-    APP_KEY = 'proteus-appkey-8668840797618032',
+    APP_KEY = 'proteus3-appkey',
     USER;
 
   function drawCircle(size) {
