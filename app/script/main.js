@@ -329,7 +329,8 @@
 
     showSpinner();
 
-    getMeasurements().then(function (measurements) {
+    getMeasurements().then(function (measurements){
+
       var map = {},
         graphData = measurements.map(function (m) {
           var d = moment(m.time);
@@ -340,6 +341,21 @@
           };
         }),
         tableData = [];
+
+        //fill the array with two values so that the table gets drawn anyway
+        if(graphData.length===0){
+          var date = moment();
+          graphData = [
+            {
+              date: date,
+              val: 0
+            },
+            {
+              date: date.add(1, 'seconds'),
+              val: 0
+            }
+          ];
+        }
 
       graphData.forEach(function (m) {
         var d = m.date,
@@ -362,8 +378,6 @@
           val: map[ref].val
         });
       });
-
-
 
       drawGraph(graphData);
       drawTable(tableData);
