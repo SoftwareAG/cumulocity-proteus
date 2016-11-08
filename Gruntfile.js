@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   function proxy(path) {
     return {
       context: '/' + path,
-      host: 'proteus.cumulocity.com',
+      host: 'innotecmk.cumulocity.com',
       port: 80,
       https: false,
       xforward: false
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         hostname: '0.0.0.0',
-        base: 'app',
+        base: '',
         keepalive: true,
         middleware: function (connect, options) {
           var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
