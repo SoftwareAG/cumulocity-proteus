@@ -24,7 +24,7 @@
 
         <a href="" class="user" style="float:left"></a>
 
-        <a href="" class="btn_logout logout" style="float:right; display:none">Logout</a>
+        <a href="" class="btn_logout logout" style="float:right; display:none">Log out</a>
 
         <h1 class="logo_title"><img alt="Proteus" src="img/logo.svg" class="logo_img"></h1>
 
@@ -32,38 +32,38 @@
 
         <div class="login screen">
             <form>
-                <label>Benutzer</label>
+                <label>User</label>
                 <input name="username" autocorrect="off" autocapitalize="off">
-                <label>Passwort</label>
+                <label>Password</label>
                 <input type="password" name="password">
                 <label>
-                  <input type="checkbox" name="remember" style="width:auto;display:inline-block;"> Login merken
+                  <input type="checkbox" name="remember" style="width:auto;display:inline-block;"> Remember me
                 </label>
-                <button class="submit btn">Einloggen</button>
+                <button class="submit btn">Log in</button>
            </form>
         </div>
 
         <div class="changePassword screen">
             <form>
-                <label>Aktuelles Passwort</label>
+                <label>Current password</label>
                 <input type="password" name="currentPassword">
-                <label>neues Passwort</label>
+                <label>New password</label>
                 <input type="password" name="newPassword">
-                <label>Bestätigen Sie das neue Kennwort</label>
+                <label>Repeat new password</label>
                 <input type="password" name="newPasswordConfirm">
-                <button class="submit btn">Kennwort ändern</button>
-                <button type="button" class="submit btn cancel_btn">stornieren</button>
+                <button class="submit btn">Change password</button>
+                <button type="button" class="submit btn cancel_btn">Cancel</button>
             </form>
         </div>
 
         <div class="main screen"  style="display:none">
 
             <div class="gauge" id="gauge">
-                <h2 class="title beige">Füllstand</h2>
+                <h2 class="title beige">Liquid level</h2>
                 <div class="percentage thin"><span class="nr">-</span> <span class="symbol">%</span></div>
                 <div class="infoAbsolute">
                     <span class="remaining beige bold"></span>
-                    <span class="title thin">Ist-Volumen</span>
+                    <span class="title thin">Current volume level</span>
                 </div>
                 <svg id="gaugeSvg">
                     <defs>
@@ -82,7 +82,7 @@
             </div>
 
             <div class="lastUpdate center">
-                <h2 class="beige bold title">Letztes update</h2>
+                <h2 class="beige bold title">Last update</h2>
                 <span class="info thin"></span>
             </div>
 
@@ -122,7 +122,7 @@
                             <path d="M4.78291667,14.3556585 L1.52083333,14.3556585 L1.52083333,10.8434634 L4.7825,10.8434634 L4.7825,14.3556585 L4.78291667,14.3556585 Z M9.34625,14.3556585 L6.08416667,14.3556585 L6.08416667,7.46780488 L9.34625,7.46780488 L9.34625,14.3556585 L9.34625,14.3556585 Z M13.90875,14.3556585 L10.6470833,14.3556585 L10.6470833,3.546 L13.90875,3.546 L13.90875,14.3556585 L13.90875,14.3556585 Z M18.4720833,14.3556585 L15.2104167,14.3556585 L15.2104167,0 L18.4720833,0 L18.4720833,14.3556585 L18.4720833,14.3556585 Z M20,15.7530732 L0,15.7530732 L0,18.054439 L20,18.054439 L20,15.7530732 L20,15.7530732 Z" id="bar_chart_3_icon" sketch:type="MSShapeGroup"></path>
                         </g>
                     </svg>
-                    Messungen
+                    Measurements
                     <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g fill="#838281">
                             <path d="M12.481,9.361 C12.575,9.453 12.622,9.562 12.622,9.686 C12.622,9.811 12.575,9.919 12.481,10.012 L9.264,13.225 C9.172,13.317 9.065,13.364 8.942,13.364 C8.819,13.364 8.711,13.317 8.618,13.225 L8.139,12.746 C8.047,12.653 8,12.545 8,12.422 C8,12.299 8.047,12.192 8.139,12.1 L10.573,9.667 L8.139,7.264 C8.047,7.171 8,7.065 8,6.946 C8,6.827 8.047,6.72 8.139,6.628 L8.618,6.14 C8.711,6.046 8.819,6 8.944,6 C9.069,6 9.176,6.046 9.264,6.139 L12.481,9.361 L12.481,9.361 Z" id="Shape" sketch:type="MSShapeGroup"></path>
@@ -133,12 +133,12 @@
 
             <div class="row staticInfo">
                 <div class="info serialNr">
-                    <h3 class="title beige bold">Gerätenr.</h3>
+                    <h3 class="title beige bold">Device no.</h3>
                     <select id="device-selector">
                     </select>
                 </div>
                 <div class="info vol">
-                    <h3 class="title beige bold">Max volumen</h3>
+                    <h3 class="title beige bold">Max volume level</h3>
                     <span class="thin val"></span>
                 </div>
                 <div class="info medium">
@@ -152,7 +152,7 @@
         </div>
 
         <div class="stats screen" style="display:none">
-            <h2 class="title beige center">Füllstand</h2>
+            <h2 class="title beige center">Liquid level</h2>
 
             <div class="graph">
                 <div class="spinner">
@@ -168,7 +168,7 @@
                             <path d="M0,9.99278351 C0,4.48273196 4.48273196,0 9.99278351,0 C15.5027835,0 19.9854639,4.48273196 19.9854639,9.99278351 C19.9854639,15.5027835 15.502732,19.9855155 9.99278351,19.9855155 C4.48273196,19.9855155 0,15.5027835 0,9.99278351 Z M1.75257732,9.99278351 C1.75257732,14.5363918 5.44912371,18.2329381 9.99278351,18.2329381 C14.5363918,18.2329381 18.2328866,14.5363918 18.2328866,9.99278351 C18.2329381,5.44912371 14.5364433,1.75257732 9.99278351,1.75257732 C5.44912371,1.75257732 1.75257732,5.44912371 1.75257732,9.99278351 Z" id="Shape" fill="#838281" sketch:type="MSShapeGroup"></path>
                         </g>
                     </svg>
-                    Zurück
+                    Back
                     <svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g fill="#838281">
                             <path d="M8.14,10.002 C8.047,9.911 8,9.803 8,9.682 C8,9.561 8.047,9.455 8.14,9.366 L11.352,6.139 C11.445,6.047 11.553,6 11.678,6 C11.802,6 11.91,6.047 12.003,6.139 L12.482,6.618 C12.575,6.712 12.622,6.819 12.622,6.944 C12.622,7.069 12.575,7.174 12.482,7.264 L10.05,9.705 L12.482,12.1 C12.575,12.192 12.622,12.297 12.622,12.418 C12.622,12.537 12.575,12.643 12.482,12.736 L12.003,13.225 C11.911,13.317 11.802,13.364 11.678,13.364 C11.553,13.364 11.445,13.317 11.352,13.225 L8.14,10.002 L8.14,10.002 Z" id="Shape" sketch:type="MSShapeGroup"></path>

@@ -238,10 +238,10 @@
         .domain([-53, -73, -83, -93, -109])
         .range(['marginal', 'ok', 'good', 'excellent']),
       txt = {
-        excellent: 'ausgezeichnet',
-        good: 'gut',
+        excellent: 'excellent',
+        good: 'good',
         ok: 'ok',
-        marginal: 'niedrig'
+        marginal: 'marginal'
       },
       val = scale(nr);
 
@@ -499,7 +499,7 @@
     getUser(token).then(function () {
       USER.pass = pass;
     }, function (data) {
-      alert('Ungültige Anmeldeinformationen');
+      alert('Invalid credentials!');
     });
   }
 
@@ -547,10 +547,10 @@
   }
 
   function setupChangePassword() {
-    var ERROR_SIZE = 'Das Passwort muss größer als 6 Zeichen lang sein',
-      ERROR_OLD_PASSWORD = 'Aktuelles Passwort ist nicht korrekt',
-      ERROR_PASSWORD_MATCH = 'Neues Passwort und Passwortbestätigung stimmen nicht überein',
-      PASSWORD_CHANGED = 'Kennwort geändert';
+    var ERROR_SIZE = 'Password must have at least 6 characters',
+      ERROR_OLD_PASSWORD = 'Incorrect current password',
+      ERROR_PASSWORD_MATCH = 'New password and repeated new password do not match',
+      PASSWORD_CHANGED = 'Password changed';
 
     $('.changePassword form').on('submit', function(e) {
       e.preventDefault();
