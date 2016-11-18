@@ -3,7 +3,7 @@
   var setGauge,
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
     URL_BASE = '',
-    TENANT = (function() {
+    TENANT = (function () {
       var tenant = 'proteus',
         hostSplit = window.location.host.split('.');
       if (hostSplit.length > 2 && hostSplit[0].match(/\w/)) {
