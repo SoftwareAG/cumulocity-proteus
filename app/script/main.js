@@ -424,7 +424,7 @@
         measurements.push(measurement);
       });
       if (res.measurements.length) {
-        getMeasurementsFromUrl(measurements, res.next.replace('http', 'https'))
+        getMeasurementsFromUrl(measurements, res.next.replace('http:', 'https:'))
           .then(function () {
             deferred.resolve(measurements);
           });
