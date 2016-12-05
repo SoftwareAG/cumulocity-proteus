@@ -1,4 +1,5 @@
 (function () {
+  var deviceSelector = $("#device-selector").selectBoxIt({autoWidth: false});
   var setGauge,
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dez'],
     URL_BASE = '',
@@ -11,7 +12,7 @@
       return tenant;
     })(),
     DEVICE_DATA = {},
-    APP_KEY = 'proteus-appkey-8668840797618032',
+    APP_KEY = 'proteus3-appkey',
     USER;
 
   function drawCircle(size) {
@@ -259,15 +260,38 @@
     $('.staticInfo .medium .val').text(info.medium);
   }
 
+  var MO;
   function setupMain() {
-
     if (!setupMain.done) {
       drawCircle($('#gauge').width());
       setupMain.done = true;
     }
 
     getMainData().success(function (data) {
-      drawMainData(data.managedObjects[0] || {});
+      var mo;
+      if (MO) {
+        mo = data.managedObjects.find(function (x) {
+          return x.id === MO.id;
+        });
+      } else {
+        mo = data.managedObjects[0];
+      }
+      drawMainData(mo || {});
+      deviceSelector.off('change');
+      deviceSelector.data('selectBox-selectBoxIt').refresh();
+      deviceSelector.data('selectBox-selectBoxIt').remove();
+      data.managedObjects.forEach(function (mo, idx) {
+        deviceSelector.data('selectBox-selectBoxIt')
+          .add({value: idx, text: mo.name});
+      });
+      deviceSelector.on('change', function () {
+        MO = data.managedObjects[$(this).val()];
+        drawMainData(MO);
+        if(!$('.stats').is(':hidden')) {
+          setupStats();
+        }
+      });
+
       if (isBigScreen()) {
         showScreen('stats', true);
       } else {
@@ -305,7 +329,8 @@
 
     showSpinner();
 
-    getMeasurements().then(function (measurements) {
+    getMeasurements().then(function (measurements){
+
       var map = {},
         graphData = measurements.map(function (m) {
           var d = moment(m.time);
@@ -316,6 +341,21 @@
           };
         }),
         tableData = [];
+
+        //fill the array with two values so that the table gets drawn anyway
+        if(graphData.length===0){
+          var date = moment();
+          graphData = [
+            {
+              date: date,
+              val: 0
+            },
+            {
+              date: date.add(1, 'seconds'),
+              val: 0
+            }
+          ];
+        }
 
       graphData.forEach(function (m) {
         var d = m.date,
@@ -338,8 +378,6 @@
           val: map[ref].val
         });
       });
-
-
 
       drawGraph(graphData);
       drawTable(tableData);
@@ -386,7 +424,7 @@
         measurements.push(measurement);
       });
       if (res.measurements.length) {
-        getMeasurementsFromUrl(measurements, res.next)
+        getMeasurementsFromUrl(measurements, res.next.replace('http:', 'https:'))
           .then(function () {
             deferred.resolve(measurements);
           });
@@ -422,12 +460,33 @@
   }
 
   function getToken() {
-    return window.localStorage.getItem('t') ||  window.sessionStorage.getItem('t');
+    return getTokenFromURL() || window.localStorage.getItem('t') ||  window.sessionStorage.getItem('t');
   }
 
   function clearToken() {
-    window.sessionStorage.getItem('t');
-    return window.localStorage.removeItem('t');
+    window.sessionStorage.removeItem('t');
+    window.localStorage.removeItem('t');
+  }
+
+  function getTokenFromURL(){
+    var url = location.search.substring(1);
+    var params = url.split('&');
+    var u;
+    var p;
+
+    for(var i=0; i<params.length; i++){
+      var attr = params[i].split('=');
+      if(attr[0] == 'u'){
+        u = attr[1];
+      } else if(attr[0] == 'p'){
+        p = attr[1];
+      }
+    }
+
+    if(u && p){
+      return buildToken(u, p, TENANT);
+    }
+    return null;
   }
 
   function login(user, pass, tenant) {

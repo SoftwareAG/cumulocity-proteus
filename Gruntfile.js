@@ -9,7 +9,7 @@ module.exports = function (grunt) {
   function proxy(path) {
     return {
       context: '/' + path,
-      host: 'innotecmk.cumulocity.com',
+      host: 'proteus.cumulocity.com',
       port: 80,
       https: false,
       xforward: false
@@ -20,8 +20,8 @@ module.exports = function (grunt) {
     server: {
       options: {
         port: 9000,
-        hostname: '0.0.0.0',
-        base: '',
+        hostname: '127.0.0.1',
+        base: 'app',
         keepalive: true,
         middleware: function (connect, options) {
           var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
@@ -50,7 +50,6 @@ module.exports = function (grunt) {
           'app/bower_components/d3/d3.js',
           'app/bower_components/moment/moment.js',
           'app/bower_components/moment/locale/de.js',
-          'app/bower_components/jquery/dist/jquery.js',
           'app/bower_components/touche/src/touche.js',
           'app/script/main.js'
         ]
